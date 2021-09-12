@@ -1,0 +1,52 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Product Detail{% endblock title %}
+{% block main-content %}
+
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-6 text-center">
+            <img src="{{ object.product_image.url }}" width="500px" height="500px" alt="" class="img-fluid img-thumbnail">
+        </div>
+        <div class="col-sm-5 offset-sm-1">
+            <h2>{{object.title}}</h2>
+            <hr>
+            <p>{{object.description}}</p> <br>
+            <h4> Rs.{{object.discounted_price}} <small class="fw-light text-decoration-line-through">{{object.selling_price}}</small>
+            </h4> <br>
+            <div class="row">
+                <div class="col-6" id="cart">
+                    <form action="{% url 'cart-view' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{object.id}}" id="product_id">
+                        {% if element %}
+                        <button type="button" class="btn btn-primary shadow px-5 py-2"><a class="text-white" href="{% url 'cart-view' %}"  style="text-decoration: none;" >Go to Cart</a></button>
+                        {% else %}
+                            <input type="hidden" name="return_url" id="return_url" value="{{request.path}}">
+                            <button type="submit" class="btn btn-primary shadow px-5 py-2">Add to Cart</button>
+                        {% endif %}
+                    </form>
+                </div>
+                <div class="col-6" id="buy">
+                    <form method="GET" action="{% url 'checkout' %}">
+                        <input type="hidden" value="{{object.id}}" name="buy_now">
+                        <button type="submit"  class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</button>
+                    </form>
+
+                </div>
+            </div>
+
+            <h5 class="mt-5">Available Offers</h5>
+            <ul>
+                <li>Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit</li>
+                <li>Special Price Get extra ₹3000 off (price inclusive of discount)</li>
+                <li>No cost EMI ₹1,667/month. Standard EMI also available</li>
+                <li>Partner Offer ₹2000 Flipkart Gift Card on Every 1000th Transaction with a new Visa Debit/Credit
+                    Card
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

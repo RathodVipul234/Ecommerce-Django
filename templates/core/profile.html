@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+{% block main-content %}
+<center xmlns="http://www.w3.org/1999/html"><h3 class="bg-dark text-white">Welcome {{request.user}}</h3></center>
+
+<div class="container-fluid my-5">
+    <div class="row">
+             <h3>{{request.user}} </h3>
+
+        <div class="col-sm-2 border-end">
+            <ul class="list-unstyled">
+                <li class="d-grid"><a href="{% url 'profile' %}" class="btn btn-primary">Profile</a></li>
+                <li class="d-grid"><a href="{% url 'address' %}" class="btn">Address</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-8 offset-sm-1">
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for form in form %}
+                <div class="col-12">
+                    <label  class="form-label">{{form.label_tag}}</label>
+                    {{form}}
+                </div>
+                {% endfor %}
+
+                <div class="col-12 mt-3">
+                    <center><button type="submit" class="btn btn-primary">Submit</button></center>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

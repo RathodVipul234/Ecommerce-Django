@@ -1,0 +1,66 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Customer Registration{% endblock title %}
+{% block main-content %}
+<div class="container">
+    <div class="row my-3">
+        <div class="col-sm-6 offset-sm-3">
+            <h3>Customer Registration</h3>
+            {% if form.non_field_errors %}
+               <small class="text-danger"> {{ form.non_field_errors }}</small>
+            {% endif %}
+            <form action="" method="post" novalidate class="shadow p-5">
+                {% csrf_token %}
+                {% for form in form %}
+                <div class="form-group mb-3">
+                    {{form.label_tag}}
+                    {{form}}
+                    <small class="text-danger">{{form.errors | striptags}}</small>
+                </div>
+                {% endfor %}
+
+<!--                <div class="mb-3">-->
+<!--                    {{ form.username.label }}-->
+<!--                    {{ form.username }}-->
+<!--                    {% if form.username.errors %}-->
+<!--                    <small class="text-danger">{{ form.username.errors }}</small>-->
+<!--                    {% endif %}-->
+<!--                </div>-->
+<!--                <div class="mb-3">-->
+<!--                    {{ form.email.label }}-->
+<!--                    {{ form.email }}-->
+<!--                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>-->
+<!--                    {% if form.email.errors %}-->
+<!--                    <small class="text-danger">{{ form.email.errors }}</small>-->
+<!--                    {% endif %}-->
+<!--                </div>-->
+<!--                <div class="mb-3">-->
+<!--                    {{ form.password1.label }}-->
+<!--                    {{ form.password1 }}-->
+<!--                    {% if form.password1.errors %}-->
+<!--                    <small  class="text-danger">{{ form.password1.errors }}</small>-->
+<!--                    {% endif %}-->
+<!--                </div>-->
+<!--                <div class="mb-3">-->
+<!--                    {{ form.password2.label }}-->
+<!--                    {{ form.password2 }}-->
+<!--                    {% if form.password2.errors %}-->
+<!--                    <small  class="text-danger">{{ form.password2.errors }}</small>-->
+<!--                    {% endif %}-->
+<!--                </div>-->
+
+                <div class="text-end">
+                    <center>
+                        <button type="submit" class="btn btn-danger">Submit</button>
+                    </center>
+                </div>
+                <br>
+                <div class="text-center text-primary fw-bold"><small>Existing User ? <a href="{% url 'login' %}"
+                                                                                        class="text-danger">Login
+                    Now</a> </small></div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

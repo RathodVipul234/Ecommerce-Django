@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Empty-Cart{% endblock title %}
+{% load custom_tags %}
+
+{% block main-content %}
+<div class="empty-cart">
+    <center>
+        <hr>
+        <h1>Opps! No Product Found</h1>
+            <img style="width:300px;height:300px" src="{% static 'core/images/empty_cart.png' %}">
+    </center>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Summary{% endblock title %}
+{% load custom_tags %}
+{% block main-content %}
+<div class="container">
+ <div class="row mt-5">
+  <div class="col-sm-6">
+    <h4>Buy now</h4>
+    <hr>
+      <div class="card mb-2">
+        <div class="row card-body">
+            <div class="col-6">
+                <img src="{{product.product_image.url}}" height="150px" width="250px">
+            </div>
+            <div class="col-6 ">
+                <h5>Product: {{ product.title }}</h5>
+                <p>Quantity: {{ product.quantity }}</p>
+                    <p class="fw-bold">Price: {{ product.discounted_price  }}</p>
+            </div>
+
+        </div>
+      </div>
+    <small>Term and Condition: Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small>
+  </div>
+
+  <div class="col-sm-4 offset-sm-1">
+    <h4>Select Shipping Address</h4>
+    <hr>
+    <form action="{% url 'buynow' %}">
+      {% if addresses.count == 0 %}
+        <center><h3><a href="{% url 'profile' %}?next={{request.get_full_path}}">Add your address </a></h3></center>
+      {% else %}
+        {% for address in addresses %}
+        <div class="card">
+          <div class="card-body">
+          <h5>{{address.name}}</h5>
+          <p>{{address.locality}}</p>
+          <p>{{address.city}},{{address.zipcode}}</p>
+          </div>
+        </div>
+          <div class="form-check mt-2 mb-5">
+            <input class="form-check-input" id="cust_id{{forloop.counter}}" name="address" value="{{address.id}}" type="radio">
+            <label class="form-check-label fw-bold">
+              Address: {{forloop.counter}} </label>
+          </div>
+        {% endfor %}
+      {% endif %}
+        <div class="text-end">
+            <input type="hidden" name="buy_now_product" id="buy_now_product" value="{{ product.id }}">
+            <input type="submit" id="Continue" class="btn btn-warning" value="Continue">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+{% if addresses.count == 0 %}
+  var button = document.getElementById('Continue')
+  button.disabled = true
+{% endif %}
+</script>
+{% endblock main-content %}

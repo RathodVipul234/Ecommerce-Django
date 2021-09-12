@@ -1,0 +1,110 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<br>
+<div class="container-fluid row">
+    <div class="col-2">
+        <section>
+            <!-- Section: Filters -->
+            <section>
+                <h5>Filters</h5>
+                <!-- Section: Condition -->
+                <section class="mb-4">
+
+                    <h6 class="font-weight-bold mb-3">Brands</h6>
+
+                    <div class="form-check pl-0 mb-3">
+                        <input type="checkbox" class="form-check-input filled-in" id="new">
+                        <label class="form-check-label small text-uppercase card-link-secondary"
+                               for="new">Samsung</label>
+                    </div>
+                    <div class="form-check pl-0 mb-3">
+                        <input type="checkbox" class="form-check-input filled-in" id="used">
+                        <label class="form-check-label small text-uppercase card-link-secondary" for="used">One
+                            plus</label>
+                    </div>
+                    <div class="form-check pl-0 mb-3">
+                        <input type="checkbox" class="form-check-input filled-in" id="collectible">
+                        <label class="form-check-label small text-uppercase card-link-secondary" for="collectible">Iphone</label>
+                    </div>
+                    <div class="form-check pl-0 mb-3 pb-1">
+                        <input type="checkbox" class="form-check-input filled-in" id="renewed">
+                        <label class="form-check-label small text-uppercase card-link-secondary"
+                               for="renewed">Oppo</label>
+                    </div>
+
+                </section>
+                <!-- Section: Condition -->
+                <!-- Section: Price -->
+                <section class="mb-4">
+
+                    <h6 class="font-weight-bold mb-3">Price</h6>
+
+                    <div class="form-check pl-0 mb-3">
+                        <input type="radio" class="form-check-input" id="under25" name="materialExampleRadios">
+                        <label class="form-check-label small text-uppercase card-link-secondary" for="under25">Under
+                            &#8377;10000</label>
+                    </div>
+                    <div class="form-check pl-0 mb-3">
+                        <input type="radio" class="form-check-input" id="2550" name="materialExampleRadios">
+                        <label class="form-check-label small text-uppercase card-link-secondary" for="2550">&#8377;10000
+                            to
+                            &#8377;20000</label>
+                    </div>
+                    <div class="form-check pl-0 mb-3">
+                        <input type="radio" class="form-check-input" id="50100" name="materialExampleRadios">
+                        <label class="form-check-label small text-uppercase card-link-secondary" for="50100">&#8377;20000
+                            to
+                            &#8377;30000</label>
+                    </div>
+                    <div class="form-check pl-0 mb-3">
+                        <input type="radio" class="form-check-input" id="100200" name="materialExampleRadios">
+                        <label class="form-check-label small text-uppercase card-link-secondary" for="100200">&#8377;30000
+                            to
+                            &#8377;40000</label>
+                    </div>
+                    <div class="form-check pl-0 mb-3">
+                        <input type="radio" class="form-check-input" id="200above" name="materialExampleRadios">
+                        <label class="form-check-label small text-uppercase card-link-secondary" for="200above">&#8377;40000
+                            &
+                            Above</label>
+                    </div>
+                    <form>
+                        <div class="d-flex align-items-center mt-4 pb-1">
+                            <div class="md-form md-outline my-0">
+                                <input id="from" type="text" class="form-control mb-0">
+                                <label for="form">&#8377; Min</label>
+                            </div>
+                            <p class="px-2 mb-0 text-muted"> - </p>
+                            <div class="md-form md-outline my-0">
+                                <input id="to" type="text" class="form-control mb-0">
+                                <label for="to">&#8377; Max</label>
+                            </div>
+                        </div>
+                    </form>
+
+                </section>
+                <!-- Section: Price -->
+            </section>
+            <!-- Section: Filters -->
+        </section>
+    </div>
+
+    <div class="col-10">
+        <div class="row">
+            {% for i in TopWear %}
+            <div class="col-3 ">
+                <img class="card-img-top" style="height: 200px; width: 200px;" src={{i.product_image.url}}>
+
+                <div class="card-body">
+                    <center><span class="card-text item "><b><a href="{% url 'product-detail' i.id  %}"> {{i.title}} </a></b></span>&nbsp;&nbsp;&nbsp;
+                    </center>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock main-content %}

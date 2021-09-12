@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+
+{% block main-content %}
+<center xmlns="http://www.w3.org/1999/html"><h3 class="bg-dark text-white">Delete Address</h3></center>
+<form action="" method="post">{% csrf_token %}
+
+<div class="container-fluid my-5">
+    <div class="row">
+        <h3>{{request.user}} </h3>
+        <div class="col-sm-2 border-end">
+            <ul class="list-unstyled">
+                <li class="d-grid"><a href="{% url 'profile' %}" class="btn">Profile</a></li>
+                <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-primary">Address</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 offset-sm-1">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <p>Name: {{object.name}}</p>
+                            <p>locality: {{object.locality}}</p>
+                            <p>city: {{object.city}}</p>
+                            <p>state: {{object.state}}</p>
+                            <p>zipcode: {{object.zipcode}}</p>
+                            <p><b>Are you sure you want to delete this address</b></p>
+                            <center>
+                                <p>
+                                    <button class="btn btn-primary" value="Cancel"><a  style="text-decoration: none;"  class="text-white" href="{% url 'address' %}">Cancel</a> </button>
+                                    <input type="submit" class="btn btn-danger" value="Confirm"/>
+                                </p>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+{% endblock main-content %}
+
+

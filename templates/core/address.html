@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<center xmlns="http://www.w3.org/1999/html"><h3 class="bg-dark text-white">Addresses</h3></center>
+
+<div class="container-fluid my-5">
+ <div class="row">
+ <h3>{{request.user}} </h3>
+  <div class="col-sm-2 border-end">
+   <ul class="list-unstyled">
+    <li class="d-grid"><a href="{% url 'profile' %}" class="btn">Profile</a></li>
+    <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-primary">Address</a></li>
+   </ul>
+  </div>
+  <div class="col-sm-9 offset-sm-1">
+   <div class="row">
+     {% if addresses.count == 0 %}
+      <center><h3>No adress added</h3></center>
+     {% endif %}
+    {% for address in addresses %}
+    <div class="col-sm-6">
+     <div class="card">
+      <div class="card-body">
+       <h3>Address {{forloop.counter}}</h3>
+       <p>Name: {{address.name}}</p>
+       <p>locality: {{address.locality}}</p>
+       <p>city: {{address.city}}</p>
+       <p>state: {{address.state}}</p>
+       <p>zipcode: {{address.zipcode}}</p>
+
+       <form method="POST">
+        {% csrf_token %}
+          <button class="btn btn-primary"> <a class="text-white" style="text-decoration: none;" href="{% url 'address_update' address.id %}">edit</a></button>
+          <button style="width:100px" class="btn btn-danger"><a style="text-decoration: none;" class=" text-white offset-sm-1" href="{% url 'address_delete' address.id %}">delete</a></button>
+       </form>
+
+      </div>
+     </div>
+    </div>
+    {% endfor %}
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}
