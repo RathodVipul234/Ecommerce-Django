@@ -16,8 +16,7 @@ from django.contrib.auth.views import PasswordChangeView,PasswordResetView
 from django.urls import reverse_lazy
 from .auth import auth_middleware,Cart_count
 import smtplib,os,sys
-from django.core.exceptions import ValidationError
-from django.urls import resolve
+import Ecommerce.settings as file
 
 
 class HomeView(ListView):
@@ -356,10 +355,12 @@ class Payment(View):
                 mail = smtplib.SMTP('smtp.gmail.com',587)
                 mail.ehlo()
                 mail.starttls()
-                mail.login('vipul.test99@gmail.com','Vipul@234')
-                mail.sendmail('vipul.test99@gmail.com',request.user.email,content)
+                email = file.email
+                password = file.password
+                mail.login(email,password)
+                mail.sendmail(email,request.user.email,content)
                 mail.close()
-                messages.success(request,"Confirmation message is sended to your Email please check")
+                messages.success(request,"Confirmation mail is sended to your Email please check")
                 return redirect('orders')
         except:
             messages.warning(request,"please Select Address")
@@ -391,10 +392,12 @@ class BuyNow(View):
                 mail = smtplib.SMTP('smtp.gmail.com',587)
                 mail.ehlo()
                 mail.starttls()
-                mail.login('vipul.test99@gmail.com','Vipul@234')
-                mail.sendmail('vipul.test99@gmail.com',request.user.email,content)
+                email = file.email
+                password = file.password
+                mail.login(email,password)
+                mail.sendmail(email,request.user.email,content)
                 mail.close()
-                messages.success(request,"Confirmation message is sended to your Email please check")
+                messages.success(request,"Confirmation mail is sended to your Email please check")
                 return redirect('orders')
         except:
             messages.error(request,"Please Select Address")

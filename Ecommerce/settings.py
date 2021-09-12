@@ -11,9 +11,15 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+import os
+import environ
+env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+environ.Env.read_env(env_file=os.path.join(BASE_DIR,'.env') )
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+email = os.environ.get('email')
+password = os.environ.get('password')
 
 
 # Quick-start development settings - unsuitable for production
@@ -154,3 +160,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # LOGIN_URL = "login"
 # LOGIN_REDIRECT_URL = "cart-view"
+
