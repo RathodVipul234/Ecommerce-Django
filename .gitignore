@@ -2,3 +2,5 @@
 .idea/
 core/migrations/
 .env
+*.pyc
+**/*.pyc
