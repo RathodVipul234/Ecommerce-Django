@@ -27,7 +27,6 @@ email="vipul.test99@gmail.com"
 # password = os.environ.get('password')
 password="Vipul@234"
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
