@@ -298,6 +298,7 @@ class UpdateAddress(UpdateView):
     template_name = 'core/profile.html'
     slug_field = 'id'
     slug_url_kwarg = 'id'
+    
     def form_valid(self, form):
         messages.success(self.request,"Address updated")
         return redirect('address')
