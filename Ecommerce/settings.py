@@ -20,8 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 environ.Env.read_env(env_file=os.path.join(BASE_DIR,'.env') )
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-email = os.environ.get('email')
-password = os.environ.get('password')
+
+# email = os.environ.get('email')
+email="vipul.test99@gmail.com"
+
+# password = os.environ.get('password')
+password="Vipul@234"
 
 
 # Quick-start development settings - unsuitable for production
