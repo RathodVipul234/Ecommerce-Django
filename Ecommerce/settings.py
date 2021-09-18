@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import environ
 import django_heroku
+from decouple import config
 
 env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
