@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import environ
+import django_heroku
+
 env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,12 +28,12 @@ password = os.environ.get('password')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'django-insecure-^(u3fw9o#*oqqtzmish1a#df27_%v-njob(9b9(62dh)ac(056'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -55,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'core.auth.auth_middleware'
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'core.auth.Cart_count'
 ]
 
@@ -95,6 +98,9 @@ import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -133,6 +139,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
@@ -161,6 +169,6 @@ AUTHENTICATION_BACKENDS = ['core.views.CustomBackend']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# LOGIN_URL = "login"
-# LOGIN_REDIRECT_URL = "cart-view"
-
+# Activate Django-Heroku.
+django_heroku.settings(locals())
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

@@ -31,8 +31,12 @@
 
        <form method="POST">
         {% csrf_token %}
-          <button class="btn btn-primary"> <a class="text-white" style="text-decoration: none;" href="{% url 'address_update' address.id %}">edit</a></button>
-          <button style="width:100px" class="btn btn-danger"><a style="text-decoration: none;" class=" text-white offset-sm-1" href="{% url 'address_delete' address.id %}">delete</a></button>
+          <a class="text-white" style="text-decoration: none;" href="{% url 'address_update' address.id %}">
+           <span class="btn btn-primary"> Edit</span>
+           </a>
+          <a style="text-decoration: none;" class=" text-white offset-sm-1" href="{% url 'address_delete' address.id %}">
+           <span style="width:100px" class="btn btn-danger">Delete</span>
+           </a>
        </form>
 
       </div>

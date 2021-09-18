@@ -54,7 +54,7 @@ class Customer(models.Model):
     locality = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     zipcode = models.IntegerField()
-    state = models.CharField(choices=STATE_CHOICE, max_length=50)
+    state = models.CharField(choices=STATE_CHOICE, max_length=50,default='Andhra Pradesh')
 
     def __str__(self):
         return self.name
