@@ -302,8 +302,6 @@ class UpdateAddress(UpdateView):
     template_name = 'core/profile.html'
     slug_field = 'id'
     slug_url_kwarg = 'id'
-    @method_decorator(login_required(login_url='login'),name='dispatch')
-
     def form_valid(self, form):
         form.save()
         messages.success(self.request,"Address updated")
