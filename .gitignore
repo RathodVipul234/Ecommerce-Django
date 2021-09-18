@@ -1,6 +1,5 @@
 /env
 .idea/
-core/migrations/
 *.pyc
 **/*.pyc
 .env
