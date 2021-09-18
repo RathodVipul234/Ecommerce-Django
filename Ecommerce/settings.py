@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'core.auth.auth_middleware'
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'core.auth.Cart_count'
+#     'core.auth.Cart_count'
 ]
 
 ROOT_URLCONF = 'Ecommerce.urls'
