@@ -3,3 +3,4 @@
 core/migrations/
 *.pyc
 **/*.pyc
+.env
