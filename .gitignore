@@ -4,3 +4,4 @@ core/migrations/
 .env
 *.pyc
 **/*.pyc
+db.sqlite3
