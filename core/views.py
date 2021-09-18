@@ -20,7 +20,6 @@ import Ecommerce.settings as file
 
 
 class HomeView(ListView):
-    @method_decorator(Cart_count)
     def get(self, request, *args, **kwargs):
         TopWear = Product.objects.filter(category="TW")
         BottomWear = Product.objects.filter(category="BW")
@@ -263,10 +262,12 @@ def remove_item(request):
 
 
 class Profile(View):
+    @method_decorator(login_required(login_url='login'),name='dispatch')
+
     def get(self,request,*args,**kwargs):
         form = ProfileForm()
         return render(request, 'core/profile.html',{'form': form})
-
+    @method_decorator(login_required(login_url='login'),name='dispatch')
     def post(self,request):
         form = ProfileForm(request.POST)
         if form.is_valid():
@@ -288,6 +289,8 @@ class Profile(View):
 
 
 class Address(View):
+    @method_decorator(login_required(login_url='login'),name='dispatch')
+
     def get(self,request):
         addresses = Customer.objects.filter(user=request.user)
         return render(request,'core/address.html',{'addresses' : addresses})
@@ -299,6 +302,8 @@ class UpdateAddress(UpdateView):
     template_name = 'core/profile.html'
     slug_field = 'id'
     slug_url_kwarg = 'id'
+    @method_decorator(login_required(login_url='login'),name='dispatch')
+
     def form_valid(self, form):
         form.save()
         messages.success(self.request,"Address updated")
@@ -338,6 +343,7 @@ class OrderSummary(View):
 
 
 class Payment(View):
+    @method_decorator(login_required(login_url='login'),name='dispatch')
     def get(self,request):
         try:
             customer_id = request.GET.get('address')
@@ -372,12 +378,15 @@ class Payment(View):
 
 
 class OrdersList(View):
+    @method_decorator(login_required(login_url='login'),name='dispatch')
     def get(self,request):
         orders = OrderPlaced.objects.filter(user = request.user).order_by('-id')
         return render(request, 'core/orders.html',{'orders':orders})
 
 
 class BuyNow(View):
+    @method_decorator(login_required(login_url='login'),name='dispatch')
+
     def get(self,request):
         product_id = request.GET.get('buy_now_product')
         try:
