@@ -89,6 +89,7 @@ WSGI_APPLICATION = 'Ecommerce.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'd9gdm6p7u6kgf8',
         'USER': 'fhovtawafeuurr',
@@ -96,6 +97,8 @@ DATABASES = {
         'HOST': 'ec2-54-235-108-217.compute-1.amazonaws.com',
         'PORT': 5432,
     }
+}
+
 
 
 import dj_database_url
