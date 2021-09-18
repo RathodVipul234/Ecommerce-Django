@@ -96,7 +96,7 @@ DATABASES = {
         'HOST': 'ec2-54-235-108-217.compute-1.amazonaws.com',
         'PORT': 5432,
     }
-}
+
 
 import dj_database_url
 db_from_env = dj_database_url.config()
