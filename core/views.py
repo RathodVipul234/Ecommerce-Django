@@ -138,20 +138,21 @@ def CustomerLogin(request):
         form = LoginForm()
     return render(request, 'core/login.html', {'form': form })
 
-
 class ChangePassword(PasswordChangeView,View):
     form_class = CustomerPasswordChangeForm
     template_name = 'core/changepassword.html'
-
+    @method_decorator(login_required(login_url='login'))
     def form_valid(self, form):
-        messages.success(self.request,'password update successfully!')
-        return redirect('home')
+        form.save()
+        messages.success(self.request,'password update successfully! please login again.')
+        return redirect('login')
 
 
 class ResetPassword(PasswordResetView):
     form_class = CustomerPasswordRestForm
     template_name = 'core/resetpassword.html'
     def form_valid(self, form):
+        form.save()
         messages.success(self.request,'password reset link shared to your email please check')
         return redirect('home')
 
@@ -299,6 +300,7 @@ class UpdateAddress(UpdateView):
     slug_field = 'id'
     slug_url_kwarg = 'id'
     def form_valid(self, form):
+        form.save()
         messages.success(self.request,"Address updated")
         return redirect('address')
 
