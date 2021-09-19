@@ -13,9 +13,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import environ
+<<<<<<< HEAD
 import django_heroku
 from decouple import config
 
+=======
+>>>>>>> 8b9840c0a79a9e54ee505d1a320acb5a1ce03caf
 env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,12 +35,17 @@ password=config("PASSWORD")
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+<<<<<<< HEAD
 # SECRET_KEY = os.environ.get('SECRET_KEY')
 SECRET_KEY = config('DJANGO_SECRET_KEY')
+=======
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
+>>>>>>> 8b9840c0a79a9e54ee505d1a320acb5a1ce03caf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -61,7 +69,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'core.auth.auth_middleware'
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'core.auth.Cart_count'
 ]
 
@@ -104,12 +111,16 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 8b9840c0a79a9e54ee505d1a320acb5a1ce03caf
 import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -148,8 +159,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
@@ -178,6 +187,6 @@ AUTHENTICATION_BACKENDS = ['core.views.CustomBackend']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# LOGIN_URL = "login"
+# LOGIN_REDIRECT_URL = "cart-view"
+
