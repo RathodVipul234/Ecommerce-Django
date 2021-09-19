@@ -1,6 +1,4 @@
 /env
 .idea/
-*.pyc
-**/*.pyc
 db.sqlite3
 .env
