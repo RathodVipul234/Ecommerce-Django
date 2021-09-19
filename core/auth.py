@@ -6,8 +6,12 @@ def Cart_count(get_response):
         if not request.session.get('user'):
             pass
         else:
-            cart_count = Cart.objects.filter(user = request.user).count()
-            request.session['cart_count'] = cart_count
+            try:
+                cart_count = Cart.objects.filter(user = request.user).count()
+                request.session['cart_count'] = cart_count
+            except:
+                pass
+
         response = get_response(request)
         return response
     return middleware
