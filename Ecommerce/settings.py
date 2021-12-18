@@ -13,12 +13,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import environ
-<<<<<<< HEAD
 import django_heroku
 from decouple import config
 
-=======
->>>>>>> 8b9840c0a79a9e54ee505d1a320acb5a1ce03caf
 env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,13 +32,8 @@ password=config("PASSWORD")
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-<<<<<<< HEAD
 # SECRET_KEY = os.environ.get('SECRET_KEY')
 SECRET_KEY = config('DJANGO_SECRET_KEY')
-=======
-SECRET_KEY = os.environ.get('SECRET_KEY')
-
->>>>>>> 8b9840c0a79a9e54ee505d1a320acb5a1ce03caf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -111,12 +103,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> 8b9840c0a79a9e54ee505d1a320acb5a1ce03caf
 import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
