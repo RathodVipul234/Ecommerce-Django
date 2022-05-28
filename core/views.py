@@ -321,9 +321,11 @@ class Payment(LoginRequiredMixin):
             mail = smtplib.SMTP('smtp.gmail.com',587)
             mail.ehlo()
             mail.starttls()
-            import pdb;pdb.set_trace()
             email = file.email
             password = file.password
+            console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++",email)
+            console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++",password)
+
             try:
                 mail.login(email,password)
                 mail.sendmail(email,request.user.email,content)
