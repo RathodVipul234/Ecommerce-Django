@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import environ
-# import django_heroku
+import django_heroku
 from decouple import config
 
 env = environ.Env()
@@ -22,21 +22,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(env_file=os.path.join(BASE_DIR,'.env') )
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
-email = os.environ.get('email')
-# email=config("EMAIL")
+# email = os.environ.get('email')
+email=config("EMAIL")
 
-password = os.environ.get('password')
-# password=config("PASSWORD")
+# password = os.environ.get('password')
+password=config("PASSWORD")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-# SECRET_KEY = config('DJANGO_SECRET_KEY')
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -182,5 +181,5 @@ AUTHENTICATION_BACKENDS = ['account.views.CustomBackend']
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Activate Django-Heroku.
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
