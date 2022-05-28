@@ -323,18 +323,18 @@ class Payment(LoginRequiredMixin):
             mail.starttls()
             email = file.email
             password = file.password
-            try:
-                print("first-first-first-first-first-first-first-first-first-first-first-")
-                mail.login(email,password)
-                print("secound-secound-secound-secound-secound-secound-secound-secound-")
-                mail.sendmail(email,request.user.email,content)
-                print("third-third-third-third-third-third-third-third-third-third-")
-                mail.close()
-                print("four-four-four-four-four-four-four-four-four-four-four-")
-                messages.success(request,"Confirmation mail is sended to your Email please check")
-            except:
-                print("fiver-fiver-fiver-fiver-fiver-fiver-fiver-fiver-fiver-")
-                messages.success(request,"due to some technicle issue Confirmation mail is not sended to your Email! but you order is booked")
+                       
+            print("first-first-first-first-first-first-first-first-first-first-first-")
+            mail.login(email,password)
+            print("secound-secound-secound-secound-secound-secound-secound-secound-")
+            mail.sendmail(email,request.user.email,content)
+            print("third-third-third-third-third-third-third-third-third-third-")
+            mail.close()
+            print("four-four-four-four-four-four-four-four-four-four-four-")
+            messages.success(request,"Confirmation mail is sended to your Email please check")
+#             except:
+#                 print("fiver-fiver-fiver-fiver-fiver-fiver-fiver-fiver-fiver-")
+#                 messages.success(request,"due to some technicle issue Confirmation mail is not sended to your Email! but you order is booked")
             return redirect('orders')
 
 
