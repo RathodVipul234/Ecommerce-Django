@@ -39,7 +39,8 @@
     <hr>
     <form action="{% url 'payment' %}">
       {% if addresses.count == 0 %}
-        <center><h3><a href="{% url 'profile' %}?next={{request.path}} ">Add your address </a></h3></center>
+        <center><h3><a type="button" class="btn btn-primary" href="{% url 'profile' %}?next={{request.path}} ">
+        Add new address</a></h3></center>
       {% else %}
         {% for address in addresses %}
         <div class="card">
@@ -56,9 +57,11 @@
           </div>
         {% endfor %}
       {% endif %}
+      {% if not addresses.count == 0 %}
         <div class="text-end">
           <input style="margin-bottom: 100px;" type="submit" id="Continue" class="btn btn-warning" value="Continue">
         </div>
+      {% endif %}
       </form>
     </div>
   </div>

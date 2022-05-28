@@ -4,6 +4,49 @@ body{
  clear: both;
 }
 
+
+/* start Dajngo message framework css*/
+--error-fg: #ba2121;
+    
+  --message-success-bg: #dfd;
+  --message-warning-bg: #ffc;
+  --message-error-bg: #ffefef;  
+  --darkened-bg: #f8f8f8; 
+  --error-fg: #e35f5f;
+  --message-success-bg: #006b1b;
+  --message-warning-bg: #583305;
+  --message-error-bg: #570808;
+  --darkened-bg: #212121;
+  }
+  /* MESSAGES & ERRORS */
+  
+  ul.messagelist {
+      padding: 0;
+      margin: 0;
+  }
+  
+  ul.messagelist li {
+      display: block;
+      font-weight: 400;
+  
+      padding: 10px 10px 10px 65px;
+      margin: 0 0 10px 0;
+      background: var(--message-success-bg) url(../img/icon-yes.svg) 40px 12px no-repeat;
+      background-size: 16px auto;
+      color: var(--body-fg);
+  }
+  
+  ul.messagelist li.warning {
+      background: var(--message-warning-bg) url(../img/icon-alert.svg) 40px 14px no-repeat;
+      background-size: 14px auto;
+  }
+  
+  ul.messagelist li.error {
+      background: var(--message-error-bg) url(../img/icon-no.svg) 40px 12px no-repeat;
+      background-size: 16px auto;
+  }
+/* End Django message framework css */
+
 .owl-carousel .item{
  /* border: 1px solid black; */
  font-size: 24px;
