@@ -1,11 +1,8 @@
+from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, PasswordResetForm,SetPasswordForm
 from django.core.exceptions import ValidationError
-from django.utils.translation import gettext, gettext_lazy as _
-from .models import Customer
-# from django.forms import forms
-from django import forms
-from .models import STATE_CHOICE
+from django.contrib.auth import authenticate, login, logout
 
 
 class CustomerRegistrationForm(UserCreationForm):
@@ -19,26 +16,26 @@ class CustomerRegistrationForm(UserCreationForm):
 
         self.fields['username'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'username'
+            'placeholder': 'Username'
         })
         self.fields['email'].required = True,
         self.fields['email'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'email',
+            'placeholder': 'Email',
         })
         self.fields['password1'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'password'
+            'placeholder': 'Password'
         })
         self.fields['password2'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'confirm password (Again)'
+            'placeholder': 'Confirm password'
         })
 
     def clean(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
-            raise ValidationError("Email already exist please try again with different Email")
+            raise ValidationError("Email already exist please try again with different email")
         return self.cleaned_data
 
 
@@ -46,38 +43,38 @@ class LoginForm(AuthenticationForm):
     class Meta:
         fields = ['username', 'password']
 
-    def __str__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.fields['username'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'username'
+            'placeholder': 'Username'
         })
 
         self.fields['password'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'password'
+            'placeholder': 'Password'
         })
 
 
 class CustomerPasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(required=True, label='old_password',
                                    widget=forms.PasswordInput(attrs={
-                                       'placeholder': 'current password',
+                                       'placeholder': 'Current password',
                                        'class': 'form-control',
                                    })
                                    )
 
     new_password1 = forms.CharField(required=True, label='new_password1',
                                     widget=forms.PasswordInput(attrs={
-                                        'placeholder': 'new password',
+                                        'placeholder': 'New password',
                                         'class': 'form-control',
                                     })
                                     )
 
     new_password2 = forms.CharField(required=True, label='new_password2',
                                     widget=forms.PasswordInput(attrs={
-                                        'placeholder': 'confirm new password',
+                                        'placeholder': 'Confirm new password',
                                         'class': 'form-control',
                                     })
                                     )
@@ -111,35 +108,3 @@ class CustomerSetPasswordForm(SetPasswordForm):
                                         'class': 'form-control',
                                     })
                                 )
-
-
-
-class ProfileForm(forms.ModelForm):
-    class Meta:
-        model = Customer
-        fields = ['name', 'locality', 'city', 'state', 'zipcode']
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        self.fields['name'].widget.attrs.update({
-            'placeholder': 'name',
-            'class': 'form-control',
-        })
-        self.fields['locality'].widget.attrs.update({
-            'placeholder': 'address',
-            'class': 'form-control',
-        })
-        self.fields['city'].widget.attrs.update({
-            'placeholder': 'city',
-            'class': 'form-control',
-        })
-        self.fields['state'].widget.select = STATE_CHOICE
-        self.fields['state'].widget.attrs.update({
-            'placeholder': 'state state',
-            'class': 'form-control',
-        })
-        self.fields['zipcode'].widget.attrs.update({
-            'placeholder': 'zipcode',
-            'class': 'form-control',
-        })

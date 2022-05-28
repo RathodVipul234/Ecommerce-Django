@@ -41,12 +41,6 @@ STATE_CHOICE = (
     ("National Capital Territory of Delhi", "National Capital Territory of Delhi"),
     ("Pondicherry", "Pondicherry"))
 
-#
-# class Address(models.Model):
-#     Customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
-#     address1 = models.CharField(max_length=100)
-#     address2 = models.CharField(max_length=100)
-
 
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -83,8 +77,8 @@ class Product(models.Model):
 
 
 class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="cart_user")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product")
     quantity = models.PositiveIntegerField(default=1)
 
 
@@ -100,8 +94,8 @@ STATUS_CHOICES = (
 
 
 class OrderPlaced(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     ordered_date = models.DateTimeField(auto_now_add=True)
