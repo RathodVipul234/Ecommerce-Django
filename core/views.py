@@ -323,8 +323,8 @@ class Payment(LoginRequiredMixin):
             mail.starttls()
             email = file.email
             password = file.password
-            console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++",email)
-            console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++",password)
+            print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++",email)
+            print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++",password)
 
             try:
                 mail.login(email,password)
