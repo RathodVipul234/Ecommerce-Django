@@ -169,7 +169,7 @@ def minus_quantity(request):
     if request.method == 'GET' and request.is_ajax():
         user = request.user.username
         product = get_object_or_404(
-            product,
+            Product,
             id=int(request.GET.get('student_id'))
         )
         cart = get_object_or_404(
