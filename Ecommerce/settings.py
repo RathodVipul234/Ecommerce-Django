@@ -171,15 +171,24 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 
-AUTHENTICATION_BACKENDS = ['account.views.CustomBackend']
-# EMAIL_HOST = 'smtp.sendgrid.net'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'testsite_app'
-# EMAIL_HOST_PASSWORD = 'mys3cr3tp4ssw0rd'
-# EMAIL_USE_TLS = True
-# DEFAULT_FROM_EMAIL = 'TestSite Team <noreply@example.com>'
+email = os.environ.get('email')
+# email=config("EMAIL")
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+password = os.environ.get('password')
+# password=config("PASSWORD")
+
+
+AUTHENTICATION_BACKENDS = ['account.views.CustomBackend']
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('email')
+# EMAIL_HOST_USER = config("email")
+EMAIL_HOST_PASSWORD = os.environ.get('password')
+# EMAIL_HOST_PASSWORD = config("PASSWORD")
+EMAIL_USE_TLS = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Activate Django-Heroku.
 # django_heroku.settings(locals())

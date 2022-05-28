@@ -15,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView,PasswordResetView
 from django.shortcuts import get_object_or_404
+from django.core.mail import send_mail
 
 
 from core.models import Product, OrderPlaced, Cart, Customer, User
@@ -169,7 +170,7 @@ def minus_quantity(request):
     if request.method == 'GET' and request.is_ajax():
         user = request.user.username
         product = get_object_or_404(
-            product,
+            Product,
             id=int(request.GET.get('student_id'))
         )
         cart = get_object_or_404(
@@ -318,15 +319,14 @@ class Payment(LoginRequiredMixin):
                         your order is Accepted by our system.
                         we will contact you soon..
                 '''
-            mail = smtplib.SMTP('smtp.gmail.com',587)
-            mail.ehlo()
-            mail.starttls()
-            email = file.email
-            password = file.password
             try:
-                mail.login(email,password)
-                mail.sendmail(email,request.user.email,content)
-                mail.close()
+                send_mail(
+                    'Your order is Placed',
+                    content,
+                    file.email,
+                    [request.user.email],
+                    fail_silently=False,
+                )
                 messages.success(request,"Confirmation mail is sended to your Email please check")
             except:
                 messages.success(request,"due to some technicle issue Confirmation mail is not sended to your Email! but you order is booked")
@@ -359,16 +359,15 @@ class BuyNow(LoginRequiredMixin):
             your order is Accepted by our system.
             we will contact you soon..
         '''
-        mail = smtplib.SMTP('smtp.gmail.com',587)
-        mail.ehlo()
-        mail.starttls()
-        email = file.email
-        password = file.password
         try:
-                mail.login(email,password)
-                mail.sendmail(email,request.user.email,content)
-                mail.close()
-                messages.success(request,"Confirmation mail is sended to your Email please check")
+            send_mail(
+                    'Your order is Placed',
+                    content,
+                    file.email,
+                    [request.user.email],
+                    fail_silently=False,
+            )
+            messages.success(request,"Confirmation mail is sended to your Email please check")
         except:
                 messages.success(request,"due to some technicle issue Confirmation mail is not sended to your Email! but you order is booked")
         return redirect('orders')

@@ -1,4 +1,3 @@
-import smtplib,os,sys
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -88,7 +87,7 @@ class CustomerLoginView(View):
         if user is not None:
             login(request, user)
             request.session['user'] = user.username
-            messages.success(request, "you have been successfully logged in!")
+            messages.success(request, "logging successfully")
             return redirect('profile')
         else:
             if User.objects.filter(
