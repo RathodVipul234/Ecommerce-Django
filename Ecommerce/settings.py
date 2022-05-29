@@ -10,11 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path
 import os
 import environ
 import django_heroku
+import dj_database_url
+from pathlib import Path
 from decouple import config
+from django.contrib.messages import constants as messages
+
+
 
 env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,19 +27,19 @@ environ.Env.read_env(env_file=os.path.join(BASE_DIR,'.env') )
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 # email = os.environ.get('email')
-email=config("EMAIL")
+email=config("EMAIL") if config("EMAIL", None) else os.environ.get('email')
 
 # password = os.environ.get('password')
-password=config("PASSWORD")
+password= config("PASSWORD") if config("PASSWORD", None) else os.environ.get('password')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = config('DJANGO_SECRET_KEY')
+SECRET_KEY = config('DJANGO_SECRET_KEY') if config('DJANGO_SECRET_KEY', None) else os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -69,7 +73,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Ecommerce.urls'
-import os
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -110,7 +114,6 @@ DATABASES = {
 
 
 
-import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
@@ -165,7 +168,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-from django.contrib.messages import constants as messages
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
@@ -177,9 +179,9 @@ AUTHENTICATION_BACKENDS = ['account.views.CustomBackend']
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 # EMAIL_HOST_USER = os.environ.get('email')
-EMAIL_HOST_USER = config("EMAIL")
+EMAIL_HOST_USER = email
 # EMAIL_HOST_PASSWORD = os.environ.get('password')
-EMAIL_HOST_PASSWORD = config("PASSWORD")
+EMAIL_HOST_PASSWORD = password
 EMAIL_USE_TLS = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
