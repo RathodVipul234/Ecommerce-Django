@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import environ
-# import django_heroku
+import django_heroku
 from decouple import config
 
 env = environ.Env()
@@ -22,18 +22,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(env_file=os.path.join(BASE_DIR,'.env') )
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
-email = os.environ.get('email')
-# email=config("EMAIL")
+# email = os.environ.get('email')
+email=config("EMAIL")
 
-password = os.environ.get('password')
-# password=config("PASSWORD")
+# password = os.environ.get('password')
+password=config("PASSWORD")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-# SECRET_KEY = config('DJANGO_SECRET_KEY')
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -171,25 +171,19 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 
-email = os.environ.get('email')
-# email=config("EMAIL")
-
-password = os.environ.get('password')
-# password=config("PASSWORD")
-
 
 AUTHENTICATION_BACKENDS = ['account.views.CustomBackend']
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('email')
-# EMAIL_HOST_USER = config("email")
-EMAIL_HOST_PASSWORD = os.environ.get('password')
-# EMAIL_HOST_PASSWORD = config("PASSWORD")
+# EMAIL_HOST_USER = os.environ.get('email')
+EMAIL_HOST_USER = config("EMAIL")
+# EMAIL_HOST_PASSWORD = os.environ.get('password')
+EMAIL_HOST_PASSWORD = config("PASSWORD")
 EMAIL_USE_TLS = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Activate Django-Heroku.
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
