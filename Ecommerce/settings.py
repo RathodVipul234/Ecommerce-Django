@@ -39,7 +39,7 @@ password= config("PASSWORD") if config("PASSWORD", None) else os.environ.get('pa
 # SECRET_KEY = os.environ.get('SECRET_KEY')
 SECRET_KEY = config('DJANGO_SECRET_KEY') if config('DJANGO_SECRET_KEY', None) else os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
